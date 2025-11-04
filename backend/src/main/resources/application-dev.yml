@@ -1,0 +1,43 @@
+spring:
+  config:
+    activate:
+      on-profile: dev
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/simple-blog
+    username: postgres
+    password: postgres
+
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: true
+
+  mail:
+    host: localhost
+    port: 1025
+    username: username
+    password: password
+    properties:
+      mail:
+        smtp:
+          auth: false
+          starttls.enable: false
+
+application:
+  security:
+    jwt:
+      secret-key: R/1h3OZcbizGmYXTTfpE5x0H+kqDToqBqgK6PyAYTqg=
+      expiration: 900000
+
+  local-storage:
+    upload-dir: uploads/images
+    public-url-prefix: /images/
+    max-size-mb: 5
+    allowed-content-types:
+      - image/jpeg
+      - image/png
+      - image/webp
