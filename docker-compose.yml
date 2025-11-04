@@ -1,0 +1,22 @@
+services:
+
+  postgres:
+    image: postgres:15.5
+    container_name: postgres-simple-blog
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-simple-blog-db:/var/lib/postgresql/data
+
+  main-dev:
+    container_name: mail-dev-simple-blog
+    image: maildev/maildev
+    ports:
+      - 1080:1080
+      - 1025:1025
+
+volumes:
+  postgres-simple-blog-db:
