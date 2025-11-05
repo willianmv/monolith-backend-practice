@@ -6,6 +6,7 @@ import com.simple.blog.backend.core.exception.DomainException;
 import com.simple.blog.backend.core.gateway.repository.IRefreshTokenRepository;
 import com.simple.blog.backend.core.gateway.repository.IUserRepository;
 import com.simple.blog.backend.core.gateway.service.IJwtService;
+import com.simple.blog.backend.core.gateway.service.ILoggerService;
 import com.simple.blog.backend.core.usecases.auth.login.LoginOutput;
 import com.simple.blog.backend.core.usecases.auth.refresh.RefreshTokenUseCase;
 import org.junit.jupiter.api.DisplayName;
@@ -20,6 +21,8 @@ import java.util.Map;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.*;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -35,8 +38,12 @@ class RefreshTokenUseCaseTest {
     @Mock
     private IRefreshTokenRepository refreshTokenRepositoryGateway;
 
+    @Mock
+    private ILoggerService loggerService;
+
     @InjectMocks
     private RefreshTokenUseCase useCase;
+
 
     @Test
     @DisplayName("Should refresh access token successfully")
@@ -48,8 +55,7 @@ class RefreshTokenUseCaseTest {
         RefreshToken refreshToken = new RefreshToken();
         refreshToken.setToken(token);
         refreshToken.setUserId(userId);
-        refreshToken.setExpiresAt(Instant.now().plusSeconds(3600));
-        refreshToken.setRevoked(false);
+        refreshToken.setExpiresAt(Instant.now().plusSeconds(3600)); // válido
 
         User user = new User();
         user.setId(userId);
@@ -58,9 +64,7 @@ class RefreshTokenUseCaseTest {
 
         when(refreshTokenRepositoryGateway.findByToken(token)).thenReturn(Optional.of(refreshToken));
         when(userRepositoryGateway.findById(userId)).thenReturn(user);
-        when(jwtServiceGateway.generateToken(user.getEmail(),
-                Map.of("id", user.getId(), "username", user.getUsername())))
-                .thenReturn("new-access-token");
+        when(jwtServiceGateway.generateToken(eq(user.getEmail()), anyMap())).thenReturn("new-access-token");
 
         // Act
         LoginOutput output = useCase.execute(token);
@@ -68,59 +72,47 @@ class RefreshTokenUseCaseTest {
         // Assert
         assertEquals("new-access-token", output.accessToken());
         assertEquals(token, output.refreshToken());
+        verify(jwtServiceGateway).generateToken(user.getEmail(),
+                Map.of("id", user.getId(), "username", user.getUsername()));
     }
 
     @Test
-    @DisplayName("Should throw if refresh token not found")
-    void shouldThrowIfRefreshTokenNotFound() {
+    @DisplayName("Should throw when refresh token not found")
+    void shouldThrowWhenRefreshTokenNotFound() {
         // Arrange
         String token = "invalid-token";
         when(refreshTokenRepositoryGateway.findByToken(token)).thenReturn(Optional.empty());
 
         // Act & Assert
         DomainException ex = assertThrows(DomainException.class, () -> useCase.execute(token));
+
         assertEquals("Invalid refresh token: invalid-token", ex.getMessage());
+        verify(loggerService).warn(contains("not found"));
     }
 
     @Test
-    @DisplayName("Should throw if token is expired")
-    void shouldThrowIfTokenIsExpired() {
+    @DisplayName("Should throw when token is expired")
+    void shouldThrowWhenTokenIsExpired() {
         // Arrange
         String token = "expired-token";
 
         RefreshToken refreshToken = new RefreshToken();
         refreshToken.setToken(token);
-        refreshToken.setExpiresAt(Instant.now().minusSeconds(1)); // já expirado
-        refreshToken.setRevoked(false);
+        refreshToken.setUserId(1L);
+        refreshToken.setExpiresAt(Instant.now().minusSeconds(1)); // expirado
 
         when(refreshTokenRepositoryGateway.findByToken(token)).thenReturn(Optional.of(refreshToken));
 
         // Act & Assert
         DomainException ex = assertThrows(DomainException.class, () -> useCase.execute(token));
+
         assertEquals("Refresh token is invalid or expired", ex.getMessage());
+        verify(loggerService).warn(contains("expired"));
     }
 
     @Test
-    @DisplayName("Should throw if token is revoked")
-    void shouldThrowIfTokenIsRevoked() {
-        // Arrange
-        String token = "revoked-token";
-
-        RefreshToken refreshToken = new RefreshToken();
-        refreshToken.setToken(token);
-        refreshToken.setExpiresAt(Instant.now().plusSeconds(3600));
-        refreshToken.setRevoked(true);
-
-        when(refreshTokenRepositoryGateway.findByToken(token)).thenReturn(Optional.of(refreshToken));
-
-        // Act & Assert
-        DomainException ex = assertThrows(DomainException.class, () -> useCase.execute(token));
-        assertEquals("Refresh token is invalid or expired", ex.getMessage());
-    }
-
-    @Test
-    @DisplayName("Should reuse the same refresh token")
-    void shouldReuseSameRefreshToken() {
+    @DisplayName("Should reuse same refresh token if valid")
+    void shouldReuseSameRefreshTokenIfValid() {
         // Arrange
         String token = "existing-refresh-token";
         long userId = 1L;
@@ -128,8 +120,7 @@ class RefreshTokenUseCaseTest {
         RefreshToken refreshToken = new RefreshToken();
         refreshToken.setToken(token);
         refreshToken.setUserId(userId);
-        refreshToken.setExpiresAt(Instant.now().plusSeconds(600));
-        refreshToken.setRevoked(false);
+        refreshToken.setExpiresAt(Instant.now().plusSeconds(600)); // ainda válido
 
         User user = new User();
         user.setId(userId);
@@ -138,15 +129,14 @@ class RefreshTokenUseCaseTest {
 
         when(refreshTokenRepositoryGateway.findByToken(token)).thenReturn(Optional.of(refreshToken));
         when(userRepositoryGateway.findById(userId)).thenReturn(user);
-        when(jwtServiceGateway.generateToken(user.getEmail(), Map.of("id", user.getId(), "username", user.getUsername())))
-                .thenReturn("access-token");
+        when(jwtServiceGateway.generateToken(eq(user.getEmail()), anyMap())).thenReturn("access-token");
 
         // Act
         LoginOutput output = useCase.execute(token);
 
         // Assert
         assertEquals("access-token", output.accessToken());
-        assertEquals(token, output.refreshToken()); // mesmo token reutilizado
+        assertEquals(token, output.refreshToken());
+        verify(loggerService).info(contains("New access token generated"));
     }
-
 }
