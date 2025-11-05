@@ -7,6 +7,7 @@ import com.simple.blog.backend.core.usecases.reply.delete.IDeleteReplyUseCase;
 import com.simple.blog.backend.core.usecases.reply.get.IGetRepliesUseCase;
 import com.simple.blog.backend.core.usecases.reply.get.ReplySummaryOutput;
 import com.simple.blog.backend.infra.config.security.SimpleBlogUserDetails;
+import com.simple.blog.backend.infra.config.swagger.docs.ReplyControllerDoc;
 import com.simple.blog.backend.infra.dto.input.CreateReplyDTO;
 import com.simple.blog.backend.infra.dto.mapper.ReplyMapperDTO;
 import com.simple.blog.backend.infra.dto.output.CreatedReplyDTO;
@@ -17,7 +18,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/replies")
-public class ReplyController {
+public class ReplyController implements ReplyControllerDoc {
 
     private final ICreateReplyUseCase createReplyUseCase;
     private final IGetRepliesUseCase getRepliesUseCase;

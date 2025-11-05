@@ -11,6 +11,7 @@ import com.simple.blog.backend.core.usecases.post.summary.IGetPostsUseCase;
 import com.simple.blog.backend.core.usecases.post.summary.PostQueryFilter;
 import com.simple.blog.backend.core.usecases.post.summary.SummaryPostOutput;
 import com.simple.blog.backend.infra.config.security.SimpleBlogUserDetails;
+import com.simple.blog.backend.infra.config.swagger.docs.PostControllerDoc;
 import com.simple.blog.backend.infra.dto.mapper.PostMapperDTO;
 import com.simple.blog.backend.infra.dto.output.CreatedPostDTO;
 import com.simple.blog.backend.infra.service.image.IImageStorageService;
@@ -24,7 +25,7 @@ import java.util.Set;
 
 @RestController
 @RequestMapping("/posts")
-public class PostController {
+public class PostController implements PostControllerDoc {
 
     private final IImageStorageService imageStorageService;
     private final ICreatePostUseCase createPostUseCase;
