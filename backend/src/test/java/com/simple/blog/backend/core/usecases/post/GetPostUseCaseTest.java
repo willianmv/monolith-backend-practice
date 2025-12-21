@@ -2,9 +2,9 @@ package com.simple.blog.backend.core.usecases.post;
 
 import com.simple.blog.backend.core.domain.Post;
 import com.simple.blog.backend.core.domain.User;
-import com.simple.blog.backend.core.gateway.repository.IPostRepository;
-import com.simple.blog.backend.core.gateway.repository.IUserRepository;
-import com.simple.blog.backend.core.gateway.service.ILoggerService;
+import com.simple.blog.backend.core.gateway.IPostRepository;
+import com.simple.blog.backend.core.gateway.IUserRepository;
+import com.simple.blog.backend.core.gateway.ILoggerService;
 import com.simple.blog.backend.core.usecases.post.detailed.DetailedPostOutput;
 import com.simple.blog.backend.core.usecases.post.detailed.GetPostUseCase;
 import org.junit.jupiter.api.BeforeEach;

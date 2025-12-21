@@ -2,9 +2,9 @@ package com.simple.blog.backend.core.usecases.post.detailed;
 
 import com.simple.blog.backend.core.domain.Post;
 import com.simple.blog.backend.core.domain.User;
-import com.simple.blog.backend.core.gateway.repository.IPostRepository;
-import com.simple.blog.backend.core.gateway.repository.IUserRepository;
-import com.simple.blog.backend.core.gateway.service.ILoggerService;
+import com.simple.blog.backend.core.gateway.IPostRepository;
+import com.simple.blog.backend.core.gateway.IUserRepository;
+import com.simple.blog.backend.core.gateway.ILoggerService;
 
 import java.util.Set;
 import java.util.stream.Collectors;

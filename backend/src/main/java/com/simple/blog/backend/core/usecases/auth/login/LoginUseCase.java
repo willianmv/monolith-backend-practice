@@ -2,11 +2,11 @@ package com.simple.blog.backend.core.usecases.auth.login;
 
 import com.simple.blog.backend.core.domain.User;
 import com.simple.blog.backend.core.exception.DomainException;
-import com.simple.blog.backend.core.gateway.repository.IUserRepository;
-import com.simple.blog.backend.core.gateway.service.IJwtService;
-import com.simple.blog.backend.core.gateway.service.ILoggerService;
-import com.simple.blog.backend.core.gateway.service.IPasswordService;
-import com.simple.blog.backend.core.gateway.service.IRefreshTokenService;
+import com.simple.blog.backend.core.gateway.IUserRepository;
+import com.simple.blog.backend.core.gateway.IJwtService;
+import com.simple.blog.backend.core.gateway.ILoggerService;
+import com.simple.blog.backend.core.gateway.IPasswordService;
+import com.simple.blog.backend.core.gateway.IRefreshTokenService;
 
 import java.util.Map;
 
@@ -43,7 +43,7 @@ public class LoginUseCase implements ILoginUseCase {
 
         if(!passwordServiceGateway.matches(loginInput.password(), user.getPassword())){
             loggerService.warn("[LOGIN] Invalid password for email: " + loginInput.email());
-            throw new DomainException("Invalid password");
+            throw new DomainException("Invalid credentials");
         }
 
         loggerService.info("[LOGIN] Credentials validated. Generating tokens...");

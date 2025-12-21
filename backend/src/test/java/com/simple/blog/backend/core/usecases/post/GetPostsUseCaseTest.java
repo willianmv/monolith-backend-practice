@@ -1,8 +1,8 @@
 package com.simple.blog.backend.core.usecases.post;
 
 import com.simple.blog.backend.core.domain.DomainPage;
-import com.simple.blog.backend.core.gateway.repository.IPostRepository;
-import com.simple.blog.backend.core.gateway.service.ILoggerService;
+import com.simple.blog.backend.core.gateway.IPostRepository;
+import com.simple.blog.backend.core.gateway.ILoggerService;
 import com.simple.blog.backend.core.usecases.post.summary.GetPostsUseCase;
 import com.simple.blog.backend.core.usecases.post.summary.PostQueryFilter;
 import com.simple.blog.backend.core.usecases.post.summary.SummaryPostOutput;

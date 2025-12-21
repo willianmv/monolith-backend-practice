@@ -4,10 +4,10 @@ import com.simple.blog.backend.core.domain.User;
 import com.simple.blog.backend.core.domain.ValidationCode;
 import com.simple.blog.backend.core.event.ActivatedAccountEvent;
 import com.simple.blog.backend.core.exception.DomainException;
-import com.simple.blog.backend.core.gateway.repository.IUserRepository;
-import com.simple.blog.backend.core.gateway.repository.IValidationCodeRepository;
-import com.simple.blog.backend.core.gateway.service.IEventPublisher;
-import com.simple.blog.backend.core.gateway.service.ILoggerService;
+import com.simple.blog.backend.core.gateway.IUserRepository;
+import com.simple.blog.backend.core.gateway.IValidationCodeRepository;
+import com.simple.blog.backend.core.gateway.IEventPublisher;
+import com.simple.blog.backend.core.gateway.ILoggerService;
 
 public class ActivateAccountUseCase implements IActivateAccountUseCase {
 

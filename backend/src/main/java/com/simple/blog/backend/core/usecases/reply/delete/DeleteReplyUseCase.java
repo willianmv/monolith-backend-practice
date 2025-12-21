@@ -4,10 +4,10 @@ import com.simple.blog.backend.core.domain.Post;
 import com.simple.blog.backend.core.domain.Reply;
 import com.simple.blog.backend.core.domain.User;
 import com.simple.blog.backend.core.exception.DomainException;
-import com.simple.blog.backend.core.gateway.repository.IPostRepository;
-import com.simple.blog.backend.core.gateway.repository.IReplyRepository;
-import com.simple.blog.backend.core.gateway.repository.IUserRepository;
-import com.simple.blog.backend.core.gateway.service.ILoggerService;
+import com.simple.blog.backend.core.gateway.IPostRepository;
+import com.simple.blog.backend.core.gateway.IReplyRepository;
+import com.simple.blog.backend.core.gateway.IUserRepository;
+import com.simple.blog.backend.core.gateway.ILoggerService;
 
 public class DeleteReplyUseCase implements IDeleteReplyUseCase{
 

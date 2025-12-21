@@ -2,9 +2,9 @@ package com.simple.blog.backend.core.usecases.auth.logout;
 
 import com.simple.blog.backend.core.domain.User;
 import com.simple.blog.backend.core.exception.DomainException;
-import com.simple.blog.backend.core.gateway.repository.IUserRepository;
-import com.simple.blog.backend.core.gateway.service.ILoggerService;
-import com.simple.blog.backend.core.gateway.service.IRefreshTokenService;
+import com.simple.blog.backend.core.gateway.IUserRepository;
+import com.simple.blog.backend.core.gateway.ILoggerService;
+import com.simple.blog.backend.core.gateway.IRefreshTokenService;
 
 public class LogoutUseCase implements ILogoutUseCase {
 

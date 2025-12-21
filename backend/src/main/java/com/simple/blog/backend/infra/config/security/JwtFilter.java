@@ -1,6 +1,6 @@
 package com.simple.blog.backend.infra.config.security;
 
-import com.simple.blog.backend.core.gateway.service.IJwtService;
+import com.simple.blog.backend.core.gateway.IJwtService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

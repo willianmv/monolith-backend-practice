@@ -1,8 +1,8 @@
 package com.simple.blog.backend.core.validator;
 
 import com.simple.blog.backend.core.exception.DomainException;
-import com.simple.blog.backend.core.gateway.repository.ITagRepository;
-import com.simple.blog.backend.core.gateway.repository.IUserRepository;
+import com.simple.blog.backend.core.gateway.ITagRepository;
+import com.simple.blog.backend.core.gateway.IUserRepository;
 import com.simple.blog.backend.core.usecases.post.create.CreatePostInput;
 import org.springframework.stereotype.Component;
 

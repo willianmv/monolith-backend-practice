@@ -2,10 +2,10 @@ package com.simple.blog.backend.core.usecases.auth;
 
 import com.simple.blog.backend.core.domain.User;
 import com.simple.blog.backend.core.exception.DomainException;
-import com.simple.blog.backend.core.gateway.repository.IUserRepository;
-import com.simple.blog.backend.core.gateway.service.IJwtService;
-import com.simple.blog.backend.core.gateway.service.IPasswordService;
-import com.simple.blog.backend.core.gateway.service.IRefreshTokenService;
+import com.simple.blog.backend.core.gateway.IUserRepository;
+import com.simple.blog.backend.core.gateway.IJwtService;
+import com.simple.blog.backend.core.gateway.IPasswordService;
+import com.simple.blog.backend.core.gateway.IRefreshTokenService;
 import com.simple.blog.backend.core.usecases.auth.login.LoginInput;
 import com.simple.blog.backend.core.usecases.auth.login.LoginOutput;
 import com.simple.blog.backend.core.usecases.auth.login.LoginUseCase;

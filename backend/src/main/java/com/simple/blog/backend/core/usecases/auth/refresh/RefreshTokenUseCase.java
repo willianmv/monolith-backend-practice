@@ -3,10 +3,10 @@ package com.simple.blog.backend.core.usecases.auth.refresh;
 import com.simple.blog.backend.core.domain.RefreshToken;
 import com.simple.blog.backend.core.domain.User;
 import com.simple.blog.backend.core.exception.DomainException;
-import com.simple.blog.backend.core.gateway.repository.IRefreshTokenRepository;
-import com.simple.blog.backend.core.gateway.repository.IUserRepository;
-import com.simple.blog.backend.core.gateway.service.IJwtService;
-import com.simple.blog.backend.core.gateway.service.ILoggerService;
+import com.simple.blog.backend.core.gateway.IRefreshTokenRepository;
+import com.simple.blog.backend.core.gateway.IUserRepository;
+import com.simple.blog.backend.core.gateway.IJwtService;
+import com.simple.blog.backend.core.gateway.ILoggerService;
 import com.simple.blog.backend.core.usecases.auth.login.LoginOutput;
 
 import java.time.Instant;

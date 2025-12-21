@@ -1,6 +1,6 @@
 package com.simple.blog.backend.infra.config.security;
 
-import com.simple.blog.backend.core.gateway.service.IJwtService;
+import com.simple.blog.backend.core.gateway.IJwtService;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
