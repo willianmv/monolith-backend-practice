@@ -1,0 +1,29 @@
+spring:
+  config:
+    activate:
+      on-profile: prod
+
+  datasource:
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+
+
+application:
+  security:
+    jwt:
+      secret-key: ${JWT_SECRET_KEY}
+      expiration: ${JWT_EXPIRATION_TIME}
+
+
+aws:
+  access-key: ${AWS_ACCESS_KEY_ID}
+  secret-key: ${AWS_SECRET_ACCESS_KEY}
+
+  s3:
+    bucket-name: ${AWS_S3_BUCKET_NAME}
+    region: ${AWS_REGION}
+
+  ses:
+    region: ${AWS_SES_REGION}
+    from-email: ${AWS_SES_FROM_EMAIL}

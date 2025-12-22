@@ -9,3 +9,11 @@ server:
   servlet:
     context-path: /api
 
+application:
+  image:
+    max-size-mb: 5
+    allowed-content-types:
+      - image/jpeg
+      - image/png
+      - image/webp
+

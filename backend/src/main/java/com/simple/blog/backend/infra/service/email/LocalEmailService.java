@@ -1,15 +1,17 @@
 package com.simple.blog.backend.infra.service.email;
 
+import org.springframework.context.annotation.Profile;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 @Service
-public class EmailServiceImpl implements IEmailService {
+@Profile("dev")
+public class LocalEmailService implements IEmailService {
 
     private final JavaMailSender javaMailSender;
 
-    public EmailServiceImpl(JavaMailSender javaMailSender) {
+    public LocalEmailService(JavaMailSender javaMailSender) {
         this.javaMailSender = javaMailSender;
     }
 

@@ -33,7 +33,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class ApplicationUseCaseBeans {
+public class UseCasesConfig {
 
     @Bean
     public IEventPublisher eventPublisherGateway(ApplicationEventPublisher springPublisher){

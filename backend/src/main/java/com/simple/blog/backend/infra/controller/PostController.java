@@ -14,7 +14,7 @@ import com.simple.blog.backend.infra.config.security.SimpleBlogUserDetails;
 import com.simple.blog.backend.infra.config.swagger.docs.PostControllerDoc;
 import com.simple.blog.backend.infra.dto.mapper.PostMapperDTO;
 import com.simple.blog.backend.infra.dto.output.CreatedPostDTO;
-import com.simple.blog.backend.infra.service.image.IImageStorageService;
+import com.simple.blog.backend.infra.service.image.IImageService;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -27,13 +27,13 @@ import java.util.Set;
 @RequestMapping("/posts")
 public class PostController implements PostControllerDoc {
 
-    private final IImageStorageService imageStorageService;
+    private final IImageService imageStorageService;
     private final ICreatePostUseCase createPostUseCase;
     private final IGetPostsUseCase getPostsUseCase;
     private final IGetPostUseCase getPostUseCase;
     private final IDeletePostUseCase deletePostUseCase;
 
-    public PostController(IImageStorageService imageStorageService, ICreatePostUseCase createPostUseCase, IGetPostsUseCase getPostsUseCase, IGetPostUseCase getPostUseCase, IDeletePostUseCase deletePostUseCase) {
+    public PostController(IImageService imageStorageService, ICreatePostUseCase createPostUseCase, IGetPostsUseCase getPostsUseCase, IGetPostUseCase getPostUseCase, IDeletePostUseCase deletePostUseCase) {
         this.imageStorageService = imageStorageService;
         this.createPostUseCase = createPostUseCase;
         this.getPostsUseCase = getPostsUseCase;
@@ -49,11 +49,7 @@ public class PostController implements PostControllerDoc {
             @RequestPart(required = false)MultipartFile image,
             @AuthenticationPrincipal SimpleBlogUserDetails user){
 
-        String imageUrl = "";
-        if(image != null && !image.isEmpty()) {
-            imageUrl = imageStorageService.save(image);
-        }
-
+        String imageUrl = handleImage(image);
         CreatePostOutput createdPost = createPostUseCase.execute(
                 new CreatePostInput(user.getId(), title, content, imageUrl, tagNames));
 
@@ -85,5 +81,13 @@ public class PostController implements PostControllerDoc {
         return ResponseEntity.noContent().build();
     }
 
+
+    private String handleImage(MultipartFile image){
+        String imageUrl = "";
+        if(image != null && !image.isEmpty()) {
+            imageUrl = imageStorageService.save(image);
+        }
+        return imageUrl;
+    }
 
 }

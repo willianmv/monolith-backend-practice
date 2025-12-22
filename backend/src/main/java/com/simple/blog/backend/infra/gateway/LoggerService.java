@@ -1,7 +1,6 @@
 package com.simple.blog.backend.infra.gateway;
 
 import com.simple.blog.backend.core.gateway.ILoggerService;
-import com.simple.blog.backend.infra.service.logger.LogFormatter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -16,16 +15,6 @@ public class LoggerService implements ILoggerService {
     @Override
     public void info(String message) {
         logger.info(message);
-    }
-
-    @Override
-    public void header(String message) {
-        logger.info(LogFormatter.startSection(message));
-    }
-
-    @Override
-    public void footer(String message) {
-        logger.info(LogFormatter.endSection(message));
     }
 
     @Override

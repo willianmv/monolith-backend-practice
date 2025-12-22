@@ -36,8 +36,3 @@ application:
   local-storage:
     upload-dir: uploads/images
     public-url-prefix: /images/
-    max-size-mb: 5
-    allowed-content-types:
-      - image/jpeg
-      - image/png
-      - image/webp
