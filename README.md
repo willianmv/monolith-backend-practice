@@ -45,6 +45,16 @@ O sistema serve como um laboratório prático de arquitetura backend, ideal para
 ![Spring Mail](https://img.shields.io/badge/Spring_Mail-6DB33F?logo=minutemailer&logoColor=white)
 ![Spring Test](https://img.shields.io/badge/Spring_Test-6DB33F?logo=spring&logoColor=white)
 
+![AWS](https://img.shields.io/badge/AWS-FF9900?logo=amazonaws&logoColor=white)
+![AWS CLI](https://img.shields.io/badge/AWS_CLI-232F3E?logo=amazonaws&logoColor=white)
+![Terraform](https://img.shields.io/badge/Terraform-623CE4?logo=terraform&logoColor=white)
+![LocalStack](https://img.shields.io/badge/LocalStack-3D58A6?logo=localstack&logoColor=white)
+
+> ⚠️ **Atenção:** Este projeto é um **laboratório de estudo**, intencionalmente projetado para permitir a integração com **AWS real e LocalStack**, além de provisionamento de infraestrutura via **Terraform**.  
+
+> A execução exige atenção à ordem correta dos passos: subir containers, inicializar LocalStack, aplicar os comandos do Terraform, configurar o perfil da AWS CLI e validar os recursos antes de testar a aplicação.  
+
+> Isso é proposital, para o experimento do fluxo completo de criação e uso de recursos AWS, tanto locais quanto reais, de forma segura e controlada.
 
 ---
 
@@ -72,6 +82,17 @@ O domínio foi planejado em múltiplos níveis — **conceitual, lógico e físi
 ### 🧪 Testes
 > A seção de testes apresenta apenas os casos de uso detalhando regras de negócio, cenários de teste e exceções esperadas.
 - [ 🧪 Testes ](docs/documentation/testes.md)
+
+
+### ☁️ AWS e Infraestrutura
+> Detalha a configuração dos serviços AWS locais e reais usados na aplicação, uso do LocalStack, e provisionamento via Terraform.
+
+- [☁️ AWS e Infraestrutura](docs/documentation/aws-infra.md)
+
+### 🚀 Como Executar
+> Guia para preparar o ambiente local, provisionar infraestrutura, subir containers e validar a aplicação.
+
+- [🚀 Como Executar](docs/documentation/como-executar.md)
 
 ---
 
