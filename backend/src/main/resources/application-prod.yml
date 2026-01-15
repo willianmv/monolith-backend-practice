@@ -15,7 +15,6 @@ application:
       secret-key: ${JWT_SECRET_KEY}
       expiration: ${JWT_EXPIRATION_TIME}
 
-
 aws:
   access-key: ${AWS_ACCESS_KEY_ID}
   secret-key: ${AWS_SECRET_ACCESS_KEY}
@@ -27,3 +26,6 @@ aws:
   ses:
     region: ${AWS_SES_REGION}
     from-email: ${AWS_SES_FROM_EMAIL}
+
+  localstack:
+    endpoint: ${LOCALSTACK_ENDPOINT}

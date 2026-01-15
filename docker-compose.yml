@@ -1,8 +1,22 @@
+version: "3.9"
+
 services:
+
+  localstack:
+    image: localstack/localstack:latest
+    container_name: localstack-simple-blog-app
+    ports:
+      - "4566:4566"
+    environment:
+      - SERVICES=s3,sns,ses
+      - AWS_DEFAULT_REGION=us-east-1
+      - DEBUG=1
+    volumes:
+      - "//var/run/docker.sock:/var/run/docker.sock"
 
   postgres:
     image: postgres:15.5
-    container_name: postgres-simple-blog
+    container_name: postgres-simple-blog-app
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
@@ -12,12 +26,18 @@ services:
     volumes:
       - postgres-simple-blog-db:/var/lib/postgresql/data
 
-  main-dev:
-    container_name: mail-dev-simple-blog
-    image: maildev/maildev
+  app:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: simple-blog-app
+    env_file:
+      - .env
+    depends_on:
+      - postgres
+      - localstack
     ports:
-      - 1080:1080
-      - 1025:1025
+      - "8080:8080"
 
 volumes:
   postgres-simple-blog-db:

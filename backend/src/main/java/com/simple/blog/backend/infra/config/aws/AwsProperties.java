@@ -12,6 +12,7 @@ public class AwsProperties {
 
     private final S3 s3 = new S3();
     private final Ses ses = new Ses();
+    private final LocalStack localStack = new LocalStack();
 
     public static class S3 {
 
@@ -57,6 +58,18 @@ public class AwsProperties {
         }
     }
 
+    public static class LocalStack{
+        private String endpoint;
+
+        public String getEndpoint() {
+            return endpoint;
+        }
+
+        public void setEndpoint(String endpoint) {
+            this.endpoint = endpoint;
+        }
+    }
+
     public String getAccessKey() {
         return accessKey;
     }
@@ -79,5 +92,9 @@ public class AwsProperties {
 
     public Ses getSes() {
         return ses;
+    }
+
+    public LocalStack getLocalStack() {
+        return localStack;
     }
 }
